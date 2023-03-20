@@ -1,0 +1,9 @@
+{
+	"extEnable": true,
+	"extAppid": "wx4b01142b00f8937c",
+	"directCommit": false,
+	"ext": {
+		"applet_id": "10001",
+		"api_url": "https://test.hemaphp.com"
+	}
+}

@@ -1,0 +1,48 @@
+{
+	"pages": [
+		{
+			"path": "pages/student/index",
+			"style": {
+				"navigationBarTitleText": "学生列表"
+			}
+		},
+		{
+			"path": "pages/class/index",
+			"style": {
+				"navigationBarTitleText": "班级列表"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#c0c4cc",
+		"selectedColor": "#303133",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/student/index",
+				"text": "学生列表",
+				"iconPath": "/static/icon/student.png",
+				"selectedIconPath": "/static/icon/student_selected.png"
+			},
+			{
+				"pagePath": "pages/class/index",
+				"text": "班级列表",
+				"iconPath": "/static/icon/class.png",
+				"selectedIconPath": "/static/icon/class_selected.png"
+			}
+		],
+		"position": "bottom"
+	},
+	"globalStyle": {
+		// #ifdef H5
+		"navigationStyle":"custom",
+		// #endif
+		"navigationBarBackgroundColor": "#ffffff",
+		"navigationBarTextStyle": "black",
+		"backgroundTextStyle": "dark"
+	},
+	"sitemapLocation": "sitemap.json",
+	"subPackages": [],
+	"debug": true
+}
