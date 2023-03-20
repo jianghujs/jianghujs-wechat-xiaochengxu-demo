@@ -1,57 +1,46 @@
 <template>
-	<view class="jh-p-10">
+	<view class="uni-pa-3">
 		<u-sticky>
-			<view class="jh-p-b-10">
+			<view class="uni-mb-3">
 				<u-button text="新增" type="success" size="small"></u-button>
 			</view>
 		</u-sticky>
-		
-		<!-- <u-list>
-			<u-list-item
-				v-for="(item, index) in tableData"
-				:key="index"> -->
-				<view class="jh-list-item" v-for="(item, index) in tableData"
-				:key="index">
-					<u-row  justify="space-between" gutter="10">
-						<u-col span="6">
-								<view>ID: {{item.id}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>学生ID: {{item.studentId}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>学生名字: {{item.name}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>性别: {{item.gender}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>出生日期: {{item.dateOfBirth}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>年级: {{item.level}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>身高: {{item.bodyHeight}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>学生状态: {{item.studentStatus}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>备注: {{item.remark}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>操作者: {{item.operationByUser}}</view>
-						</u-col>
-						<u-col span="6">
-								<view>操作时间: {{item.operationAt}}</view>
-						</u-col>
-					</u-row>
-				</view>
+
+		<uni-table ref="table" :loading="isTableLoading" border stripe emptyText="暂无更多数据">
+			<uni-tr>
+				<uni-th width="150">操作</uni-th>
+				<uni-th>ID</uni-th>
+				<uni-th>学生ID</uni-th>
+				<uni-th>学生名字</uni-th>
+				<uni-th>性别</uni-th>
+				<uni-th>出生日期</uni-th>
+				<uni-th>年级</uni-th>
+				<uni-th>身高</uni-th>
+				<uni-th>学生状态</uni-th>
+				<uni-th>备注</uni-th>
+				<uni-th>操作者</uni-th>
+				<uni-th>操作时间</uni-th>
+			</uni-tr>
+			<uni-tr v-for="(item, index) in tableData" :key="index">
+				<uni-td>
+					<u--text type="success" text="班级列表"></u--text>
+					<u--text type="success" text="修改" ></u--text>
+					<u--text type="success" text="删除"></u--text>
+				</uni-td>
+				<uni-td>{{ item.id }}</uni-td>
+				<uni-td>{{ item.studentId }}</uni-td>
+				<uni-td>{{ item.name }}</uni-td>
+				<uni-td>{{ item.gender }}</uni-td>
+				<uni-td>{{ item.dateOfBirth }}</uni-td>
+				<uni-td>{{ item.level }}</uni-td>
+				<uni-td>{{ item.bodyHeight }}</uni-td>
+				<uni-td>{{ item.studentStatus }}</uni-td>
+				<uni-td>{{ item.remark }}</uni-td>
+				<uni-td>{{ item.operationByUser }}</uni-td>
+				<uni-td>{{ item.operationAt }}</uni-td>
+			</uni-tr>
+		</uni-table>
 				
-			<!-- </u-list-item>
-		</u-list> -->
-		
   </view>
 </template>
 
@@ -62,6 +51,7 @@
 	export default {
 		data() {
 			return {
+				isTableLoading: true,
 				tableData: [],
 			};
 		},
@@ -142,22 +132,12 @@
 
         this.tableData = result.data.appData.resultData.rows;
         this.isTableLoading = false;
-
-				console.log('tableData==============', this.tableData)
       },
       // ---------- <<<<<<<<<<< 获取数据 uiAction  --------
-
 
 		}
 	};
 </script>
 <style>
-	.jh-list-item{
-		color: '#606266';
-		background-color: #fff;
-    padding: 20rpx;
-    border-radius: 8rpx;
-    font-size: 24rpx;
-		margin-bottom: 10rpx;
-	}
+
 </style>
