@@ -17,7 +17,7 @@
 		onLaunch(options) {
 			// #ifdef MP-WEIXIN || MP-BAIDU || MP-TOUTIAO || MP-ALIPAY
 			//支持微信小程序	，百度小程序，字节跳动小程序
-			this.autoLogin();//自动登录
+			// this.autoLogin();//自动登录
 			// #endif
 	
 			// 记录系统信息
@@ -30,7 +30,7 @@
 			console.log('device=============', uni.getDeviceInfo(), uni.getSystemInfoSync());
 		},
 		methods: {	
-			
+			jianghuAxios,
 			/**
 			 * 当前用户id
 			 */
@@ -171,6 +171,40 @@
 					}
 				});
 			},
+
+			/**
+			 * 加载中
+			 */
+			loading(title) {
+				uni.showLoading({
+					title,
+					mask: true
+				});
+			},
+
+			/**
+			 * 成功提示框
+			 */
+			success(title) {
+				uni.showToast({
+					title,
+					icon: 'success',
+					mask: true
+				});
+			},
+
+			/**
+			 * 提示弹窗
+			 */
+			async confirmDialog(title, content) {
+				return await uni.showModal({
+					title,
+					content,
+					success(res) {
+						return res.confirm;
+					}
+				});
+			},
 			
 			/**
 			 * 小程序新版本检测与升级
@@ -228,4 +262,15 @@
 	.u-text__value{
 		font-size: 24rpx !important;
 	}
+
+	//form
+	.uni-forms-item__label{
+		font-size: 24rpx !important;
+	}
+
+	//input
+	.is-input-border.is-focused{
+		border: 1px solid #19be6b !important;
+	}
+	
 </style>
