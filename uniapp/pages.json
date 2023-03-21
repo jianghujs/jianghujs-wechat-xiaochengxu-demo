@@ -7,9 +7,21 @@
 			}
 		},
 		{
+			"path": "pages/classOfStudent/index",
+			"style": {
+				"navigationBarTitleText": "学生的班级列表"
+			}
+		},
+		{
 			"path": "pages/class/index",
 			"style": {
 				"navigationBarTitleText": "班级列表"
+			}
+		},
+		{
+			"path": "pages/studentOfClass/index",
+			"style": {
+				"navigationBarTitleText": "班级的学生列表"
 			}
 		}
 	],

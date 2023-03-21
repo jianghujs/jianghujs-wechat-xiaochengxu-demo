@@ -4,6 +4,7 @@
 	 * tabBarLinks为常量, 无需修改
 	 */
 	const tabBarLinks = ['class/index', 'student/index'];
+	import config from '@/config.js';
 	//引入 jianghuAxios
 	import jianghuAxios from '@/common/jianghuJs/jianghuAxios.js';
 	
@@ -17,36 +18,19 @@
 		onLaunch(options) {
 			// #ifdef MP-WEIXIN || MP-BAIDU || MP-TOUTIAO || MP-ALIPAY
 			//支持微信小程序	，百度小程序，字节跳动小程序
-			// this.autoLogin();//自动登录
+			this.autoLogin();//自动登录
 			// #endif
 	
 			// 记录系统信息
-			uni.setStorageSync('system', uni.getSystemInfoSync());
+			uni.setStorageSync('device', uni.getDeviceInfo());
 
 			// #ifdef MP-WEIXIN
 			this.updateApp();
 			// #endif
-
-			console.log('device=============', uni.getDeviceInfo(), uni.getSystemInfoSync());
 		},
 		methods: {	
 			jianghuAxios,
-			/**
-			 * 当前用户id
-			 */
-			getUserId() {
-				user = this.getUser();
-				return user.user_id || '';
-			},
-			
-			/**
-			 * 当前用户
-			 */
-			getUser() {
-				return uni.getStorageSync('user') || '';
-			},
-			
-			
+	
 			/**
 			 * 自动登录
 			 */
@@ -55,37 +39,28 @@
 				// 执行微信登录
 				uni.login({
 				  success: async (res) => {
-					const result = await jianghuAxios({
-						data: {
-							appData: {
-								pageId: 'login',
-								actionId: 'xcxLogin',
-								actionData: {
-									code: res.code,
-									deviceType: 'pad',
-									deviceId: '111',
-									userAgent: '222'
-								},
+						const device = uni.getStorageSync('device') || {};
+						const result = await jianghuAxios({
+							data: {
+								appData: {
+									pageId: 'login',
+									actionId: 'xcxLogin',
+									actionData: {
+										code: res.code,
+										deviceType: device.deviceType,
+										deviceId: device.deviceId,
+										userAgent: `${device.deviceBrand}/${device.viceModel}/${device.eviceOrientation}/${device.evicePixelRatio}/${device.system}/${device.platform}`
+									},
+								}
 							}
-						}
-					});
-					console.log('111111111', result)
-					// uni.setStorageSync('user', result.data.detail);
-					// callback && callback(result.data.detail);
+						});
+						uni.setStorageSync(`${config.appId}_authToken`, result.data.appData.resultData.authToken);
 				  },
 				  fail: (res) => {
-					console.log('uni.login fail', res)
+						console.log('uni.login fail', res)
 				  }
 				});
 				// #endif
-			},
-
-			/**
-			 * 验证登录
-			 */
-			checkIsLogin() {
-				user = this.getUser();
-				return user.is_login;
 			},
 			
 			/**
@@ -117,62 +92,6 @@
 			},
 			
 			/**
-			 * jianghuAxios 请求
-			*/
-			async request(funObj) {
-				try{
-					const result = await jianghuAxios({
-						data: {
-							appData: {
-								pageId: 'studentList',
-								actionId: 'selectItemList',
-								actionData: {},
-							}
-						}
-					})
-					return {
-						data: result.data.appData.resultData.rows || result.data.appData.resultData.row || result.data.appData.resultData || {},
-						success: result.data.status === 'success',
-						message: ''
-					}
-				} catch (error) {
-					console.error(error)
-				}
-			},
-			
-	
-			/**
-			 * 显示成功提示框
-			 */
-			showSuccess(msg, callback) {
-				uni.showToast({
-					title: msg,
-					icon: 'success',
-					mask: true,
-					duration: 1500,
-					success() {
-						callback && setTimeout(() => {
-							callback();
-						}, 1500);
-					}
-				});
-			},
-			
-			/**
-			 * 显示失败提示框
-			 */
-			showError(msg, callback) {
-				uni.showModal({
-					title: '友情提示',
-					content: msg,
-					showCancel: false,
-					success(res) {
-						callback && callback();
-					}
-				});
-			},
-
-			/**
 			 * 加载中
 			 */
 			loading(title) {
@@ -190,19 +109,6 @@
 					title,
 					icon: 'success',
 					mask: true
-				});
-			},
-
-			/**
-			 * 提示弹窗
-			 */
-			async confirmDialog(title, content) {
-				return await uni.showModal({
-					title,
-					content,
-					success(res) {
-						return res.confirm;
-					}
 				});
 			},
 			
@@ -246,8 +152,7 @@
 <style lang="scss">
 	@import '@/uni_modules/uni-scss/index.scss';
 	@import "@/uni_modules/uview-ui/index.scss";
-	@import "@/common/jh.css";
-	
+
 	// table
 	.uni-table-th, .uni-table-td{
 		font-size: 24rpx !important;
@@ -270,7 +175,19 @@
 
 	//input
 	.is-input-border.is-focused{
-		border: 1px solid #19be6b !important;
+		border: 1px solid #5ac725 !important;
 	}
 	
+	//check
+	.uni-table-checkbox .checkbox__inner.is-checked {
+		border-color: #5ac725 !important;
+		background-color: #5ac725 !important;
+	}
+	.uni-table-checkbox .checkbox__inner:hover {
+		border-color: #5ac725 !important;
+	}
+	.uni-table-checkbox .checkbox__inner.checkbox--indeterminate {
+		border-color: #5ac725 !important;
+		background-color: #5ac725 !important;
+	}
 </style>

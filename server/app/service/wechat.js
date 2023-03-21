@@ -46,7 +46,7 @@ class WechatService extends Service {
           userId: 'wx_' + idGenerateUtil.uuid(36),
           openid,
           sessionKey,
-          username: '',
+          username: 'wx_' + idGenerateUtil.uuid(36),
           avatar: '',
           userType: 'wxxcx_user'
         });
@@ -100,6 +100,8 @@ class WechatService extends Service {
         authToken
       });
     }
+
+    return authToken;
   }
 
   // 更新微信用户名

@@ -2,10 +2,8 @@
  * 配置文件
  */
 module.exports = {
-  appId: 'jianghujs-3table-crud',
-  jianghuAxiosDomain: 'http://127.0.0.1:7002',
-  // appId: 'jianghujs-wechat-xiaochengxu-server',
-  // jianghuAxiosDomain: 'http://127.0.0.1:7001',
+  appId: 'jianghujs-wechat-xiaochengxu-server',
+  jianghuAxiosDomain: 'http://127.0.0.1:7001',
   
   api_url: "/api/food.",//接口路径（注意后面一点）
   version: "1.3.0",//版本号

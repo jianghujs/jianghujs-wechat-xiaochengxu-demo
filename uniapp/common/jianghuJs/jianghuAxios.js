@@ -13,10 +13,6 @@ if (appInfo.userAgent.length > 127) {
   appInfo.userAgent = appInfo.userAgent.substring(0, 126);
 }
 
-const KB = 1024;
-const MB = 1024 * KB;
-const GB = 1024 * MB;
-
 class BizError extends Error {
 	constructor({
 		errorCode,
@@ -76,8 +72,9 @@ jianghuAxios.interceptors.request.use(async config => {
 	if (!data.appData.userAgent) {
 		data.appData.userAgent = userAgent;
 	}
-	// const authToken = localStorage.getItem(`${appInfo.appId}_authToken`);
-	const authToken = '--hEgmd8DOho24e91PdJnyWGXDd1GsDssoKZ';
+
+	const authToken = uni.getStorageSync(`${appInfo.appId}_authToken`) || '';
+
 	if (!data.appData.authToken) {
 		data.appData.authToken = authToken;
 	}
@@ -108,21 +105,13 @@ jianghuAxios.interceptors.response.use(async response => {
 	} = responseData;
 	if (errorCode === 'request_token_invalid' || errorCode === 'request_user_not_exist' ||
 		errorCode === 'request_token_expired' || errorCode === 'user_banned') {
-		localStorage.removeItem(`${appInfo.appId}_authToken`);
+		uni.removeStorageSync(`${appInfo.appId}_authToken`)
 		uni.showModal({
 			title: "提示",
 			content: errorReason,
 			showCancel: false,
 			confirmText: '知道了'
 		});
-		if (location.pathname === `/${appInfo.appId}/page/login`) {
-			throw new BizError({
-				errorCode,
-				errorReason,
-				response
-			});
-		}
-		location.href = `/${appInfo.appId}/page/login`;
 		return response;
 	}
 
