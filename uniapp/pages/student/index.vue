@@ -127,6 +127,7 @@
 
       // ---------- 获取数据 uiAction >>>>>>>>>> --------
       async getTableData() {
+		return
         this.isTableLoading = true;
         const result = await jianghuAxios({
           data: {

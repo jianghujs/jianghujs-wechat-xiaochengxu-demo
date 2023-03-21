@@ -50,21 +50,34 @@
 			/**
 			 * 自动登录
 			 */
-			autoLogin:function(callback){
-				//#ifdef MP-WEIXIN
+			autoLogin(callback){
+				// #ifdef MP-WEIXIN
 				// 执行微信登录
-				// uni.login({
-				//   success(res) {
-				// 	// 发送用户信息
-				// 	this._post_form('user/autoLogin', {
-				// 	  code: res.code
-				// 	}, function (result) {
-				// 		uni.setStorageSync('user', result.data.detail);
-				// 		callback && callback(result.data.detail);
-				// 	}, false, false);
-				//   }
-				// });
-				//#endif
+				uni.login({
+				  success: async (res) => {
+					const result = await jianghuAxios({
+						data: {
+							appData: {
+								pageId: 'login',
+								actionId: 'xcxLogin',
+								actionData: {
+									code: res.code,
+									deviceType: 'pad',
+									deviceId: '111',
+									userAgent: '222'
+								},
+							}
+						}
+					});
+					console.log('111111111', result)
+					// uni.setStorageSync('user', result.data.detail);
+					// callback && callback(result.data.detail);
+				  },
+				  fail: (res) => {
+					console.log('uni.login fail', res)
+				  }
+				});
+				// #endif
 			},
 
 			/**
@@ -197,6 +210,6 @@
 	};
 </script>
 <style lang="scss">
-	@import "@/uni_modules/uview-ui/index.scss";
-	@import "@/common/jh.css";
+@import "@/uni_modules/uview-ui/index.scss";
+@import "@/common/jh.css";
 </style>
