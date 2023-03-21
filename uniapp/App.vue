@@ -210,6 +210,22 @@
 	};
 </script>
 <style lang="scss">
-@import "@/uni_modules/uview-ui/index.scss";
-@import "@/common/jh.css";
+	@import '@/uni_modules/uni-scss/index.scss';
+	@import "@/uni_modules/uview-ui/index.scss";
+	@import "@/common/jh.css";
+	
+	// table
+	.uni-table-th, .uni-table-td{
+		font-size: 24rpx !important;
+	}
+
+	// text
+	.u-text{
+		display: inline-block !important;
+		width: auto !important;
+		margin-left: 10rpx !important;
+	}
+	.u-text__value{
+		font-size: 24rpx !important;
+	}
 </style>
