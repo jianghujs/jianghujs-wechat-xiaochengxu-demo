@@ -18,8 +18,8 @@
 
 ```sql
 # 数据库初始化
-create database `jianghujs-wechat-xiaochengxu-server` default character set utf8mb4 collate utf8mb4_bin;
-use jianghujs-wechat-xiaochengxu-server;
+create database `jianghujs_wechat_xiaochengxu_demo_server` default character set utf8mb4 collate utf8mb4_bin;
+use jianghujs_wechat_xiaochengxu_demo_server;
 # 运行 sql/init.sql 文件
 ```
 

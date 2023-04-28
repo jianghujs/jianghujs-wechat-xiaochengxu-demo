@@ -59,7 +59,7 @@ module.exports = appInfo => {
           port: '3306',
           user: 'root',
           password: '123456',
-          database: 'jianghujs_basic'
+          database: 'jianghujs_wechat_xiaochengxu_demo_server'
         },
         pool: { min: 0, max: 10 },
         acquireConnectionTimeout: 30000

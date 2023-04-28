@@ -16,9 +16,9 @@ module.exports = appInfo => {
     appTitle: '小程序 demo',
     appLogo: `${appId}/public/img/logo.svg`,
 
-    indexPage: `/${appId}/page/doUiAction`,
-    loginPage: `/${appId}/page/login`,
-    helpPage: `/${appId}/page/help`,
+    indexPage: `/`,
+    loginPage: `/`,
+    helpPage: `/`,
 
     uploadDir: path.join(appInfo.baseDir, 'upload'),
     downloadBasePath: `/${appId}/upload`,
