@@ -10,7 +10,7 @@
    port: 3306,
    user: 'root',
    password: '123456',
-   database: 'jianghujs-wechat-xiaochengxu-server'
+   database: 'jianghujs_wechat_xiaochengxu_demo_server'
    ```
 4. 启动 npm run dev
    
